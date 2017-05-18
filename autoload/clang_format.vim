@@ -141,7 +141,7 @@ function! s:verify_command()
 endfunction
 
 function! s:shellescape(str) abort
-    if s:on_windows && (&shell =~? 'cmd\.exe')
+    if s:on_windows && (&shell =~? 'cmd\.exe') && !exists('g:loaded_vimproc')
         return '^"' . substitute(substitute(substitute(a:str,
                     \ '[&|<>()^"%]', '^\0', 'g'),
                     \ '\\\+\ze"', '\=repeat(submatch(0), 2)', 'g'),
